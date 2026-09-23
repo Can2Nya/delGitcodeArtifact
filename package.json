@@ -42,16 +42,10 @@
       "icon": "assets/icon-512.png",
       "category": "public.app-category.developer-tools",
       "identity": null,
+      "artifactName": "${productName}-${version}-mac-${arch}.${ext}",
       "target": [
         {
           "target": "dmg",
-          "arch": [
-            "x64",
-            "arm64"
-          ]
-        },
-        {
-          "target": "zip",
           "arch": [
             "x64",
             "arm64"

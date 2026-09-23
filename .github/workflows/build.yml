@@ -22,7 +22,6 @@ jobs:
             artifact: GitCodeArtifactCleaner-mac
             paths: |
               dist/*.dmg
-              dist/*.zip
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
