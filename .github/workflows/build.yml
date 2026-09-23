@@ -1,0 +1,48 @@
+name: Build Apps
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            script: build:win
+            artifact: GitCodeArtifactCleaner-win
+            paths: |
+              dist/*.exe
+              dist/*.blockmap
+          - os: macos-latest
+            script: build:mac
+            artifact: GitCodeArtifactCleaner-mac
+            paths: |
+              dist/*.dmg
+              dist/*.zip
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build (${{ matrix.os }})
+        run: npm run ${{ matrix.script }}
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact }}
+          path: ${{ matrix.paths }}
+          if-no-files-found: error

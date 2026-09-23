@@ -1,0 +1,74 @@
+{
+  "name": "gitcode-artifact-cleaner",
+  "version": "1.0.0",
+  "description": "GitCode/AtomGit 流水线 Artifacts 清理工具",
+  "main": "main.js",
+  "author": "GitCodeArtifactCleaner",
+  "scripts": {
+    "start": "electron .",
+    "build:win": "electron-builder --win",
+    "build:mac": "electron-builder --mac"
+  },
+  "devDependencies": {
+    "electron": "^44.0.0",
+    "electron-builder": "^26.0.0"
+  },
+  "build": {
+    "appId": "com.gitcode.artifactcleaner",
+    "productName": "GitCodeArtifactCleaner",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "index.html",
+      "renderer.js",
+      "styles.css",
+      "assets/**/*"
+    ],
+    "win": {
+      "icon": "assets/icon.png",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "mac": {
+      "icon": "assets/icon-512.png",
+      "category": "public.app-category.developer-tools",
+      "identity": null,
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true
+    }
+  }
+}

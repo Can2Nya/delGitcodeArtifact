@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'" />
+  <title>GitCode Artifact 清理工具</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <h1>GitCode / AtomGit Artifact 清理工具</h1>
+  </header>
+
+  <main class="app-main">
+    <section class="config-panel">
+      <div class="field-row">
+        <div class="field field-grow">
+          <label for="baseUrl">Base URL</label>
+          <input id="baseUrl" type="text" value="https://api.atomgit.com" placeholder="https://api.atomgit.com" />
+        </div>
+        <div class="field">
+          <label for="owner">Owner</label>
+          <input id="owner" type="text" list="ownerList" value="BitFun-Platform" placeholder="选择或输入 owner" />
+          <datalist id="ownerList">
+            <option value="OpenBitFun"></option>
+            <option value="BitFun-Platform"></option>
+          </datalist>
+        </div>
+        <div class="field">
+          <label for="repo">Repo</label>
+          <input id="repo" type="text" list="repoList" value="bitfun_build" placeholder="选择或输入 repo" />
+          <datalist id="repoList">
+            <option value="bitfun_agent_kernel"></option>
+            <option value="bitfun_build"></option>
+          </datalist>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field field-grow">
+          <label for="accessToken">Access Token</label>
+          <input id="accessToken" type="password" placeholder="access_token" />
+        </div>
+        <div class="field">
+          <label for="runId">流水线 ID (Run ID，留空则查全部)</label>
+          <input id="runId" type="text" placeholder="留空列出仓库全部 Artifacts" />
+        </div>
+        <div class="field field-btn">
+          <label>&nbsp;</label>
+          <button id="btnQuery" class="btn btn-primary">查询 Artifacts</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="toolbar">
+      <div class="toolbar-left">
+        <span id="summary" class="summary">尚未查询</span>
+      </div>
+      <div class="toolbar-right">
+        <button id="btnSelectAll" class="btn btn-ghost">全选</button>
+        <button id="btnInvert" class="btn btn-ghost">反选</button>
+        <button id="btnDelete" class="btn btn-danger" disabled>删除选中</button>
+      </div>
+    </section>
+
+    <section class="table-wrap">
+      <table class="artifact-table">
+        <thead>
+          <tr>
+            <th class="col-check"><input id="checkHeader" type="checkbox" title="全选" /></th>
+            <th class="col-id">ID</th>
+            <th>名称</th>
+            <th class="col-size">大小</th>
+            <th class="col-run">Run ID</th>
+            <th class="col-time">创建时间</th>
+            <th class="col-time">过期时间</th>
+            <th class="col-op">操作</th>
+          </tr>
+        </thead>
+        <tbody id="artifactBody">
+          <tr class="empty-row">
+            <td colspan="8">输入流水线 ID 后点击“查询 Artifacts”（留空则列出仓库全部）</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer id="statusBar" class="status-bar">就绪</footer>
+
+  <script src="renderer.js"></script>
+</body>
+</html>
