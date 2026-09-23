@@ -17,7 +17,6 @@ jobs:
             artifact: GitCodeArtifactCleaner-win
             paths: |
               dist/*.exe
-              dist/*.blockmap
           - os: macos-latest
             script: build:mac
             artifact: GitCodeArtifactCleaner-mac
