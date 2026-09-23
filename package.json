@@ -1,6 +1,6 @@
 {
   "name": "gitcode-artifact-cleaner",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "GitCode/AtomGit 流水线 Artifacts 清理工具",
   "main": "main.js",
   "author": "GitCodeArtifactCleaner",
